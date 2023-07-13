@@ -5,7 +5,7 @@ services:
     container_name: roach1
     image: cockroachdb/cockroach:latest
     hostname: roach1
-    command: start --insecure --join=roach1,roach2
+    command: bash -c "cockroach start --insecure --join=roach1,roach2; cockroach init --insecure"
     volumes:
       - roach1:/cockroach/cockroach-data
     networks:
