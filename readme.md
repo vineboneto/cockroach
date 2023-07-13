@@ -1,4 +1,4 @@
-# Estudando CockroachDB
+# [Estudando CockroachDB](https://github.com/cockroachdb/cockroach)
 
 Este guia irá ajudá-lo a configurar e explorar o CockroachDB, um banco de dados distribuído SQL escalável e altamente disponível. Vamos abordar os passos necessários para executar o CockroachDB em um ambiente Docker e como se conectar a ele utilizando o haproxy para balanceamento de carga.
 
