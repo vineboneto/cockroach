@@ -1,0 +1,53 @@
+version: "3"
+
+services:
+  roach1:
+    container_name: roach1
+    image: cockroachdb/cockroach:latest
+    hostname: roach1
+    command: start --insecure --join=roach1,roach2
+    volumes:
+      - roach1:/cockroach/cockroach-data
+    networks:
+      - roachnet
+  roach2:
+    container_name: roach2
+    image: cockroachdb/cockroach:latest
+    hostname: roach2
+    command: start --insecure --join=roach1,roach2
+    volumes:
+      - roach2:/cockroach/cockroach-data
+    networks:
+      - roachnet
+  haproxy:
+    container_name: haproxy
+    image: haproxy:1.7
+    depends_on:
+      - roach1
+      - roach2
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    networks:
+      - roachnet
+    ports:
+      - "26257:26257"
+      - "8080:8080"
+  rubyscript:
+    restart: always
+    container_name: rubyscript
+    build:
+      context: .
+      dockerfile: Dockerfile.ruby
+    depends_on:
+      - haproxy
+    networks:
+      - roachnet
+
+networks:
+  roachnet:
+    name: roachnet
+    driver: bridge
+
+volumes:
+  roach1:
+  roach2:
