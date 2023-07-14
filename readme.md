@@ -8,16 +8,16 @@ Este guia irá ajudá-lo a configurar e explorar o CockroachDB, um banco de dado
 
 ## Executando o CockroachDB com balanceamento de carga usando o haproxy
 
-**1.** Clone o repositório do CockroachDB no GitHub:
+**1.** Clone o repositório do GitHub:
 
 ```shell
-git clone https://github.com/cockroachdb/cockroach
+git clone https://github.com/vineboneto/cockroach-load-balancer
 ```
 
 **2.** Acesse o diretório do CockroachDB:
 
 ```shell
-cd cockroach
+cd cockroach-load-balancer
 ```
 
 **3.** Execute o CockroachDB com o Docker Compose para criar um cluster de dois nós (roach1 e roach2) com balanceamento de carga usando o haproxy:
