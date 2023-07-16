@@ -32,21 +32,27 @@ docker-compose up -d
 docker-compose ps
 ```
 
-**5.** Conecte-se ao cluster utilizando o haproxy. Utilize o seguinte comando para acessar o shell do PostgreSQL no contêiner:
+**5.** Inicie o Cluster
+
+```shell
+docker exec -it roach1 ./cockroach init --insecure
+```
+
+**6.** Conecte-se ao cluster utilizando o haproxy. Utilize o seguinte comando para acessar o shell do PostgreSQL no contêiner:
 
 ```shell
 docker run -it --network=roachnet postgres psql "postgresql://root@haproxy:26257/defaultdb?sslmode=disable"
 ```
 
-**6.** Agora você está conectado ao cluster CockroachDB através do haproxy. Você pode executar comandos SQL para interagir com o banco de dados.
+**7.** Agora você está conectado ao cluster CockroachDB através do haproxy. Você pode executar comandos SQL para interagir com o banco de dados.
 
-**7.** Para conectar-se diretamente a um nó específico do cluster, execute o seguinte comando:
+**8.** Para conectar-se diretamente a um nó específico do cluster, execute o seguinte comando:
 
 ```shell
 docker exec -it roach1 ./cockroach sql --insecure -e 'select now()'
 ```
 
-**8.** Você também pode acompanhar as logs do script Ruby que está sendo executado. Utilize o seguinte comando:
+**9.** Você também pode acompanhar as logs do script Ruby que está sendo executado. Utilize o seguinte comando:
 
 ```shell
 docker exec -it rubyscript tail -f logfile.log
